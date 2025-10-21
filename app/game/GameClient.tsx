@@ -203,7 +203,7 @@ export default function GameClient({ gameId, items, initialCompleted, initialSho
     };
     // Fire immediately and then every 3 seconds
     fire();
-    const id = setInterval(fire, 3000);
+    const id = setInterval(fire, 2000);
     return () => clearInterval(id);
   }, [allDone, launchBurstAt]);
 
