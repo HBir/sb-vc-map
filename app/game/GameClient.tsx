@@ -268,13 +268,12 @@ export default function GameClient({ gameId, items, initialCompleted }: Props) {
         {items.map((it, i) => {
           const done = completedTaskIds.includes(it.taskId);
           return (
-            <button
+            <div
               key={i}
-              className={`h-6 w-6 rounded-full border flex items-center justify-center ${done ? "bg-green-500 text-white border-green-500" : i === currentIdx ? "border-primary" : "border-muted-foreground/40"}`}
-              onClick={() => setCurrentIdx(i)}
+              className={`h-6 w-6 rounded-full border flex items-center justify-center select-none ${done ? "bg-green-500 text-white border-green-500" : i === currentIdx ? "border-primary" : "border-muted-foreground/40"}`}
             >
               {done ? <CheckIcon size={14} /> : <span className="text-[10px]">{i + 1}</span>}
-            </button>
+            </div>
           );
         })}
       </div>
