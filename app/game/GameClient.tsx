@@ -172,7 +172,7 @@ export default function GameClient({ gameId, items, initialCompleted }: Props) {
             completed={items
               .filter((it) => completedTaskIds.includes(it.taskId))
               .map((it) => ({ lat: it.solution.lat, lng: it.solution.long }))}
-            tasks={showDebugIndices ? items.map((it, i) => ({ lat: it.solution.lat, lng: it.solution.long, index: i })) : undefined}
+            tasks={showDebugIndices ? items.map((it, i) => ({ lat: it.solution.lat, lng: it.solution.long, index: i, id: it.taskId })) : undefined}
             showDebugIndices={showDebugIndices}
           />
         </div>

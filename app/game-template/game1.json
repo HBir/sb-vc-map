@@ -8,12 +8,12 @@
     "clues":
       {
         "text": "",
-        "hint": "At the end of the world",
+        "hint": "🏠",
         "image": "/game-template/home.jpeg"
       }
   },
   {
-    "taskId": "1.17",
+    "taskId": "1.2",
     "solution": {
       "long": 13.007095730459953,
       "lat": 55.606823210221776
@@ -21,12 +21,12 @@
     "clues":
       {
         "text": "",
-        "hint": "At the end of the world",
+        "hint": "🇩🇪🏪",
         "image": "/game-template/caroli.jpeg"
       }
   },
   {
-    "taskId": "1.4",
+    "taskId": "1.3",
     "solution": {
       "long": 13.000232378626915,
       "lat": 55.60616736878191
@@ -34,12 +34,77 @@
     "clues":
       {
         "text": "",
-        "hint": "At the end of the world",
+        "hint": "🔳 >",
         "image": "/game-template/stortorg.jpeg"
       }
   },
   {
-    "taskId": "1.2",
+    "taskId": "1.4",
+    "solution": {
+      "long": 12.993702738797081,
+      "lat": 55.607924275528276
+    },
+    "clues":
+      {
+        "text": "",
+        "hint": "At the end of the world",
+        "image": "/game-template/mlive.jpeg"
+      }
+  },
+  {
+    "taskId": "1.5",
+    "solution": {
+      "long": 12.988214503066503,
+      "lat": 55.60683763769601
+    },
+    "clues":
+      {
+        "text": "",
+        "hint": "At the end of the world",
+        "image": "/game-template/nybygge.jpeg"
+      }
+  },
+  {
+    "taskId": "1.6",
+    "solution": {
+      "long": 12.991537490544054,
+      "lat": 55.61239942903158
+    },
+    "clues":
+      {
+        "text": "Media!",
+        "hint": "Evolution",
+        "image": "/game-template/media-ev.jpeg"
+      }
+  },
+  {
+    "taskId": "1.7",
+    "solution": {
+      "long": 12.978226245254668,
+      "lat": 55.61494456806056
+    },
+    "clues":
+      {
+        "text": "",
+        "hint": "At the end of the world",
+        "image": "/game-template/vhamnen.jpeg"
+      }
+  },
+  {
+    "taskId": "1.8",
+    "solution": {
+      "long": 12.975664766523682,
+      "lat": 55.61219938013892
+    },
+    "clues":
+      {
+        "text": "",
+        "hint": "At the end of the world",
+        "image": "/game-template/ttorso.jpeg"
+      }
+  },
+  {
+    "taskId": "1.9",
     "solution": {
       "long": 12.970906589536446,
       "lat": 55.614970346983235
@@ -52,38 +117,33 @@
       }
   },
   {
-    "taskId": "1.3",
+    "taskId": "1.10",
     "solution": {
-      "long": 12.991537490544054,
-      "lat": 55.61239942903158
-    },
-    "clues":
-      {
-        "text": "Media!",
-        "hint": "Evolution",
-        "image": "/game-template/media-ev.jpeg"
-      }
-  },
-
-
-  {
-    "comment": "triangeln",
-    "taskId": "1.6",
-    "solution": {
-      "long": 13.001600976658326,
-      "lat": 55.59562030835825
+      "long": 12.9704400896219,
+      "lat": 55.60511921751139
     },
     "clues":
       {
         "text": "",
-        "hint": "Δ",
-        "image": "/game-template/triangeln.jpeg"
+        "hint": "At the end of the world",
+        "image": "/game-template/ribban.jpeg"
       }
   },
-
-
   {
-    "taskId": "1.5",
+    "taskId": "1.11",
+    "solution": {
+      "long": 12.990555190191941,
+      "lat": 55.60200236419323
+    },
+    "clues":
+      {
+        "text": "",
+        "hint": "At the end of the world",
+        "image": "/game-template/kungsparken.jpeg"
+      }
+  },
+  {
+    "taskId": "1.12",
     "solution": {
       "long": 13.001068719399239,
       "lat": 55.59734890186785
@@ -97,46 +157,22 @@
   },
 
   {
-    "taskId": "1.7",
+    "comment": "triangeln",
+    "taskId": "1.13",
     "solution": {
-      "long": 13.009764297685887,
-      "lat": 55.60409517420082
+      "long": 13.001600976658326,
+      "lat": 55.59562030835825
     },
     "clues":
       {
         "text": "",
-        "hint": "At the end of the world",
-        "image": "/game-template/kanalen.jpeg"
+        "hint": "Δ",
+        "image": "/game-template/triangeln.jpeg"
       }
   },
+
   {
-    "taskId": "1.8",
-    "solution": {
-      "long": 12.993702738797081,
-      "lat": 55.607924275528276
-    },
-    "clues":
-      {
-        "text": "",
-        "hint": "At the end of the world",
-        "image": "/game-template/mlive.jpeg"
-      }
-  },
-  {
-    "taskId": "1.9",
-    "solution": {
-      "long": 12.988214503066503,
-      "lat": 55.60683763769601
-    },
-    "clues":
-      {
-        "text": "",
-        "hint": "At the end of the world",
-        "image": "/game-template/nybygge.jpeg"
-      }
-  },
-  {
-    "taskId": "1.10",
+    "taskId": "1.14",
     "solution": {
       "long": 12.9972016936765,
       "lat": 55.58733772264946
@@ -148,34 +184,23 @@
         "image": "/game-template/pildammsparken.jpeg"
       }
   },
+
   {
-    "taskId": "1.11",
+    "taskId": "1.15",
     "solution": {
-      "long": 12.9704400896219,
-      "lat": 55.60511921751139
+      "long": 13.014035625249605,
+      "lat": 55.59340306587786
     },
     "clues":
       {
         "text": "",
         "hint": "At the end of the world",
-        "image": "/game-template/ribban.jpeg"
+        "image": "/game-template/folkets.jpeg"
       }
   },
+
   {
-    "taskId": "1.12",
-    "solution": {
-      "long": 13.016778880201462,
-      "lat": 55.604808138224676
-    },
-    "clues":
-      {
-        "text": "",
-        "hint": "At the end of the world",
-        "image": "/game-template/rsjopark.jpeg"
-      }
-  },
-  {
-    "taskId": "1.13",
+    "taskId": "1.16",
     "solution": {
       "long": 13.005796604567868,
       "lat": 55.603767975218176
@@ -187,34 +212,38 @@
         "image": "/game-template/tattoo.jpeg"
       }
   },
+
   {
-    "taskId": "1.14",
+    "taskId": "1.17",
     "solution": {
-      "long": 13.000232378626915,
-      "lat": 55.60616736878191
+      "long": 13.009764297685887,
+      "lat": 55.60409517420082
     },
     "clues":
       {
         "text": "",
         "hint": "At the end of the world",
-        "image": "/game-template/ttorso.jpeg"
+        "image": "/game-template/kanalen.jpeg"
       }
   },
+
+
   {
-    "taskId": "1.15",
+    "taskId": "1.18",
     "solution": {
-      "long": 12.978226245254668,
-      "lat": 55.61494456806056
+      "long": 13.016778880201462,
+      "lat": 55.604808138224676
     },
     "clues":
       {
         "text": "",
         "hint": "At the end of the world",
-        "image": "/game-template/vhamnen.jpeg"
+        "image": "/game-template/rsjopark.jpeg"
       }
   },
+
   {
-    "taskId": "1.16",
+    "taskId": "1.19",
     "solution": {
       "long": 13.011800433590036,
       "lat": 55.607184478556555
@@ -226,6 +255,4 @@
         "image": "/game-template/home2.jpeg"
       }
   }
-
-
 ]

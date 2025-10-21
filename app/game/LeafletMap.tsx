@@ -8,7 +8,7 @@ import L from "leaflet";
 type Props = {
   center?: { lat: number; lng: number } | null;
   completed?: { lat: number; lng: number }[];
-  tasks?: { lat: number; lng: number; index: number }[];
+  tasks?: { lat: number; lng: number; index: number, id: string }[];
   showDebugIndices?: boolean;
 };
 
@@ -48,11 +48,11 @@ export default function MapView({ center, completed, tasks, showDebugIndices }: 
     [],
   );
 
-  const numberIcon = (n: number) =>
+  const numberIcon = (n: number, id: string) =>
     L.divIcon({
       className: "task-index-marker",
-      html: `<div style="color:black;background:white;border:1px solid #aaa;border-radius:4px;padding:2px 6px;font-size:12px;font-weight:600;line-height:1;box-shadow:0 1px 2px rgba(0,0,0,0.2)">${n}</div>`,
-      iconSize: [24, 24],
+      html: `<div style="color:black;background:white;border:1px solid #aaa;border-radius:4px;padding:2px 6px;font-size:12px;font-weight:600;line-height:1;box-shadow:0 1px 2px rgba(0,0,0,0.2)">${n}, ${id}</div>`,
+      iconSize: [35, 24],
       iconAnchor: [12, 12],
     });
 
@@ -71,7 +71,7 @@ export default function MapView({ center, completed, tasks, showDebugIndices }: 
           <RLMarker key={`c-${idx}`} position={[p.lat, p.lng]} icon={completedIcon} />
         ))}
         {showDebugIndices && tasks?.map((t) => (
-          <RLMarker key={`t-${t.index}`} position={[t.lat, t.lng]} icon={numberIcon(t.index + 1)} />
+          <RLMarker key={`t-${t.index}`} position={[t.lat, t.lng]} icon={numberIcon(t.index + 1, t.id)} />
         ))}
       </RLMapContainer>
     </div>
