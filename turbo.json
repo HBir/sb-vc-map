@@ -1,0 +1,69 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": [".env"],
+  "tasks": {
+    "build:types": {
+      "outputs": ["packages/types/dist/**", "packages/types/src/generated/**"]
+    },
+    "build": {
+      "dependsOn": ["build:types", "^build"],
+      "env": [
+
+        "NEXT_PUBLIC_SUPABASE_URL",
+        "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY",
+      ],
+      "outputs": ["dist/**", ".next/**"]
+    },
+    "lint": {
+      "outputs": [],
+      "inputs": ["src/**/*.ts", "src/**/*.tsx", ".eslintrc", "eslint.config.js"]
+    },
+    "lint:fix": {
+      "outputs": [],
+      "inputs": ["src/**/*.ts", "src/**/*.tsx", ".eslintrc", "eslint.config.js"]
+    },
+    "format": {
+      "outputs": [],
+      "inputs": ["src/**/*.ts", "src/**/*.tsx", "prettier.config.js"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "test": {
+      "outputs": [],
+      "inputs": [
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "src/**/*.test.ts",
+        "src/**/*.spec.ts",
+        "!src/test/integration/**"
+      ]
+    },
+    "test:integration": {
+      "outputs": [],
+      "inputs": [
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "src/test/integration/**/*.test.ts",
+        "src/test/integration/**/*.spec.ts"
+      ],
+      "env": ["SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY_TEST"]
+    },
+    "test:browser": {
+      "outputs": ["test-results/**", "playwright-report/**"],
+      "inputs": [
+        "tests/**/*.spec.ts",
+        "tests/**/*.test.ts",
+        "playwright.config.ts",
+        "global-setup.ts",
+        "global-teardown.ts"
+      ],
+      "env": ["PLAYWRIGHT_BASE_URL", "STAGING_URL", "PRODUCTION_URL", "CI"]
+    },
+    "test:browser:ui": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

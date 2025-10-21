@@ -28,7 +28,7 @@ function resolveImagePath(p: string): string {
   return p;
 }
 
-const LeafletMap = dynamic(() => import("./LeafletMap"), { ssr: false });
+const LeafletMap = dynamic(() => import("./LeafletMap"), { ssr: false, loading: () => null });
 
 function haversineMeters(aLat: number, aLng: number, bLat: number, bLng: number): number {
   const R = 6371000; // meters
