@@ -86,7 +86,7 @@
     "clues":
       {
         "text": "",
-        "hint": "At the end of the world",
+        "hint": "⬅️⚓",
         "image": "/game-template/vhamnen.jpeg"
       }
   },
@@ -99,7 +99,7 @@
     "clues":
       {
         "text": "",
-        "hint": "At the end of the world",
+        "hint": "🔄🕺",
         "image": "/game-template/ttorso.jpeg"
       }
   },
@@ -125,7 +125,7 @@
     "clues":
       {
         "text": "",
-        "hint": "At the end of the world",
+        "hint": "🐶🏖️",
         "image": "/game-template/ribban.jpeg"
       }
   },
@@ -138,7 +138,7 @@
     "clues":
       {
         "text": "",
-        "hint": "At the end of the world",
+        "hint": "👑🏞️",
         "image": "/game-template/kungsparken.jpeg"
       }
   },
@@ -151,7 +151,7 @@
     "clues":
       {
         "text": "",
-        "hint": "At the end of the world",
+        "hint": "🚶‍♂️🛣️",
         "image": "/game-template/ggatan.jpeg"
       }
   },
@@ -180,7 +180,7 @@
     "clues":
       {
         "text": "",
-        "hint": "At the end of the world",
+        "hint": "🌳⛲🌳",
         "image": "/game-template/pildammsparken.jpeg"
       }
   },
@@ -194,7 +194,7 @@
     "clues":
       {
         "text": "",
-        "hint": "At the end of the world",
+        "hint": "👫🏞️👫",
         "image": "/game-template/folkets.jpeg"
       }
   },
@@ -208,7 +208,7 @@
     "clues":
       {
         "text": "",
-        "hint": "At the end of the world",
+        "hint": "🎨☠️",
         "image": "/game-template/tattoo.jpeg"
       }
   },
@@ -222,7 +222,7 @@
     "clues":
       {
         "text": "",
-        "hint": "At the end of the world",
+        "hint": "🦆🦆🦆",
         "image": "/game-template/kanalen.jpeg"
       }
   },
@@ -237,7 +237,7 @@
     "clues":
       {
         "text": "",
-        "hint": "At the end of the world",
+        "hint": "Pipe lake park",
         "image": "/game-template/rsjopark.jpeg"
       }
   },
@@ -251,7 +251,7 @@
     "clues":
       {
         "text": "",
-        "hint": "At the end of the world",
+        "hint": "🏠❤️",
         "image": "/game-template/home2.jpeg"
       }
   }

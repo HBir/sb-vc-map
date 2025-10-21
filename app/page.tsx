@@ -48,6 +48,7 @@ export default async function Home() {
         gameId="game1"
         items={gameData}
         initialCompleted={completedTaskIds}
+        initialShowIntro={completedTaskIds.length === 0}
       />
     </div>
   );

@@ -22,6 +22,7 @@ type Props = {
   gameId: string;
   items: GameItem[];
   initialCompleted: string[];
+  initialShowIntro?: boolean;
 };
 
 function resolveImagePath(p: string): string {
@@ -45,7 +46,7 @@ function haversineMeters(aLat: number, aLng: number, bLat: number, bLng: number)
   return R * c;
 }
 
-export default function GameClient({ gameId, items, initialCompleted }: Props) {
+export default function GameClient({ gameId, items, initialCompleted, initialShowIntro }: Props) {
   const [completedTaskIds, setCompletedTaskIds] = useState<string[]>(initialCompleted);
   const [currentIdx, setCurrentIdx] = useState<number>(() => {
     const firstIncomplete = items.findIndex((it) => !initialCompleted.includes(it.taskId));
@@ -57,6 +58,7 @@ export default function GameClient({ gameId, items, initialCompleted }: Props) {
   const [userPos, setUserPos] = useState<{ lat: number; lng: number } | null>(null);
   const [hintPresses, setHintPresses] = useState<number>(0);
   const hereBtnRef = useRef<HTMLButtonElement | null>(null);
+  const [introActive, setIntroActive] = useState<boolean>(initialShowIntro ?? (initialCompleted.length === 0));
 
   const current = items[currentIdx];
 
@@ -263,6 +265,21 @@ export default function GameClient({ gameId, items, initialCompleted }: Props) {
 
   return (
     <div className="flex flex-col gap-4 p-4 max-w-xl mx-auto w-full">
+      {introActive ? (
+        <div className="flex flex-col items-center justify-center gap-6 text-center py-16">
+          <h1 className="text-3xl font-bold">Klava's Quest</h1>
+          <p className="text-muted-foreground max-w-md">
+            You will be given a series of images. Your task is to figure out where the photograph was taken. If you go there you will be granted the next clue.
+          </p>
+          <p className="text-muted-foreground max-w-md">
+            Are you ready?
+          </p>
+          <Button onClick={() => setIntroActive(false)}>
+            Start!
+          </Button>
+        </div>
+      ) : (
+        <>
       {/* Progress */}
       <div className="flex items-center gap-2 justify-center sticky top-0 bg-background/80 backdrop-blur py-2 z-10">
         {items.map((it, i) => {
@@ -320,6 +337,8 @@ export default function GameClient({ gameId, items, initialCompleted }: Props) {
           <div className="text-2xl font-bold mb-2">All challenges completed!</div>
           <div className="text-muted-foreground">Great job ✨</div>
         </div>
+      )}
+        </>
       )}
     </div>
   );
