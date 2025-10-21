@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import GameClient from "./game/GameClient";
 import { AuthButton } from "@/components/auth-button";
+import ResetProgressButton from "./game/ResetProgressButton";
 
 type GameClue = {
   text: string;
@@ -38,7 +39,8 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen w-full flex flex-col">
-      <div className="w-full flex justify-end border-b border-b-foreground/10 h-14 items-center px-4">
+      <div className="w-full flex justify-between border-b border-b-foreground/10 h-14 items-center px-4">
+        <ResetProgressButton gameId="game1" />
         {/* Auth actions incl. Logout */}
         <AuthButton />
       </div>

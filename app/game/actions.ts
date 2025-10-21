@@ -29,4 +29,31 @@ export async function saveProgressAction(gameId: string, completedTaskIds: strin
   return upsertRes.data;
 }
 
+export async function resetProgressAction(gameId: string) {
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.getUser();
+  if (error || !data.user) {
+    throw new Error("Unauthenticated");
+  }
+
+  const upsertRes = await supabase
+    .from("game_progress")
+    .upsert(
+      {
+        user_id: data.user.id,
+        game_id: gameId,
+        completed_task_ids: [],
+      },
+      { onConflict: "user_id,game_id" },
+    )
+    .select()
+    .single();
+
+  if (upsertRes.error) {
+    throw new Error(upsertRes.error.message);
+  }
+
+  return upsertRes.data;
+}
+
 
