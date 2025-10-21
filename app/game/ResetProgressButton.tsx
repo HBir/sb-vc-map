@@ -22,7 +22,7 @@ export default function ResetProgressButton({ gameId }: { gameId: string }) {
 
   return (
     <Button variant="outline" size="sm" onClick={onClick} disabled={isPending}>
-      {isPending ? "Resetting..." : "Reset progress"}
+      {isPending ? "Resetting..." : "Reset"}
     </Button>
   );
 }
