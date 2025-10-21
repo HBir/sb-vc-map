@@ -18,7 +18,6 @@ type GameItem = {
 };
 
 type Props = {
-  userId: string;
   gameId: string;
   items: GameItem[];
   initialCompleted: number[];
@@ -45,7 +44,7 @@ function haversineMeters(aLat: number, aLng: number, bLat: number, bLng: number)
   return R * c;
 }
 
-export default function GameClient({ userId, gameId, items, initialCompleted }: Props) {
+export default function GameClient({ gameId, items, initialCompleted }: Props) {
   const [completed, setCompleted] = useState<number[]>(initialCompleted);
   const [currentIdx, setCurrentIdx] = useState<number>(() => {
     const firstIncomplete = items.findIndex((_, i) => !initialCompleted.includes(i));
@@ -63,9 +62,7 @@ export default function GameClient({ userId, gameId, items, initialCompleted }: 
   const saveProgress = useCallback(async (newCompleted: number[]) => {
     try {
       await saveProgressAction(gameId, newCompleted);
-    } catch (e) {
-      // ignore network errors temporarily
-    }
+    } catch {}
   }, [gameId]);
 
   const checkLocation = useCallback(() => {

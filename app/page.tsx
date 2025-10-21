@@ -42,7 +42,6 @@ export default async function Home() {
         <AuthButton />
       </div>
       <GameClient
-        userId={data.user.id}
         gameId="game1"
         items={gameData}
         initialCompleted={completedIndices}

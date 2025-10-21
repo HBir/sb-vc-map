@@ -19,7 +19,7 @@ export async function GET(_req: Request, { params }: { params: { filename: strin
         "Cache-Control": "public, max-age=31536000, immutable",
       },
     });
-  } catch (e) {
+  } catch {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 }
