@@ -1,51 +1,52 @@
-import { DeployButton } from "@/components/deploy-button";
-import { EnvVarWarning } from "@/components/env-var-warning";
+import { createClient } from "@/lib/supabase/server";
+import { redirect } from "next/navigation";
+import GameClient from "./game/GameClient";
 import { AuthButton } from "@/components/auth-button";
-import { Hero } from "@/components/hero";
-import { ThemeSwitcher } from "@/components/theme-switcher";
-import { ConnectSupabaseSteps } from "@/components/tutorial/connect-supabase-steps";
-import { SignUpUserSteps } from "@/components/tutorial/sign-up-user-steps";
-import { hasEnvVars } from "@/lib/utils";
-import Link from "next/link";
 
-export default function Home() {
+type GameClue = {
+  text: string;
+  hint: string;
+  image: string;
+};
+
+type GameItem = {
+  solution: { long: number; lat: number };
+  clues: GameClue;
+};
+
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const supabase = await createClient();
+  const { data, error } = await supabase.auth.getUser();
+  if (error || !data.user) {
+    redirect("/auth/login");
+  }
+
+  const gameDataModule = await import("@/app/game-template/game1.json");
+  const gameData = (gameDataModule.default || []) as GameItem[];
+
+  const { data: progressRow } = await supabase
+    .from("game_progress")
+    .select("completed_indices")
+    .eq("user_id", data.user.id)
+    .eq("game_id", "game1")
+    .maybeSingle();
+
+  const completedIndices: number[] = progressRow?.completed_indices ?? [];
+
   return (
-    <main className="min-h-screen flex flex-col items-center">
-      <div className="flex-1 w-full flex flex-col gap-20 items-center">
-        <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-          <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
-            <div className="flex gap-5 items-center font-semibold">
-              <Link href={"/"}>Next.js Supabase Starter</Link>
-              <div className="flex items-center gap-2">
-                <DeployButton />
-              </div>
-            </div>
-            {!hasEnvVars ? <EnvVarWarning /> : <AuthButton />}
-          </div>
-        </nav>
-        <div className="flex-1 flex flex-col gap-20 max-w-5xl p-5">
-          <Hero />
-          <main className="flex-1 flex flex-col gap-6 px-4">
-            <h2 className="font-medium text-xl mb-4">Next steps</h2>
-            {hasEnvVars ? <SignUpUserSteps /> : <ConnectSupabaseSteps />}
-          </main>
-        </div>
-
-        <footer className="w-full flex items-center justify-center border-t mx-auto text-center text-xs gap-8 py-16">
-          <p>
-            Powered by{" "}
-            <a
-              href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-              target="_blank"
-              className="font-bold hover:underline"
-              rel="noreferrer"
-            >
-              Supabase
-            </a>
-          </p>
-          <ThemeSwitcher />
-        </footer>
+    <div className="min-h-screen w-full flex flex-col">
+      <div className="w-full flex justify-end border-b border-b-foreground/10 h-14 items-center px-4">
+        {/* Auth actions incl. Logout */}
+        <AuthButton />
       </div>
-    </main>
+      <GameClient
+        userId={data.user.id}
+        gameId="game1"
+        items={gameData}
+        initialCompleted={completedIndices}
+      />
+    </div>
   );
 }
