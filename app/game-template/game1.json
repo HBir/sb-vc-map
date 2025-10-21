@@ -1,0 +1,26 @@
+[
+  {
+    "solution": {
+      "long": 13.001600976658326,
+      "lat": 55.59562030835825
+    },
+    "clues":
+      {
+        "text": "Δ",
+        "hint": "Triangeln",
+        "image": "/game-template/img1.jpeg"
+      }
+  },
+  {
+    "solution": {
+      "long": 12.970906589536446,
+      "lat": 55.614970346983235
+    },
+    "clues":
+      {
+        "text": "Blåsigt!",
+        "hint": "Titanic",
+        "image": "/game-template/img2.jpeg"
+      }
+  }
+]
