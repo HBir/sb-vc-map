@@ -220,7 +220,7 @@ export default function GameClient({ gameId, items, initialCompleted, initialSho
       },
       { enableHighAccuracy: true, maximumAge: 10000, timeout: 10000 },
     );
-  }, [completedTaskIds, current, currentIdx, saveProgress]);
+  }, [completedTaskIds, current, currentIdx, saveProgress, burstFromButton]);
 
   useEffect(() => {
     if (completedTaskIds.includes(current.taskId)) {
@@ -267,7 +267,7 @@ export default function GameClient({ gameId, items, initialCompleted, initialSho
     <div className="flex flex-col gap-4 p-4 max-w-xl mx-auto w-full">
       {introActive ? (
         <div className="flex flex-col items-center justify-center gap-6 text-center py-16">
-          <h1 className="text-3xl font-bold">Klava's Quest</h1>
+          <h1 className="text-3xl font-bold">Klava&apos;s Quest</h1>
           <p className="text-muted-foreground max-w-md">
             You will be given a series of images. Your task is to figure out where the photograph was taken. If you go there you will be granted the next clue.
           </p>
