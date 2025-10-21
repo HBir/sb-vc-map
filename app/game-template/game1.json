@@ -47,7 +47,7 @@
     "clues":
       {
         "text": "",
-        "hint": "At the end of the world",
+        "hint": "🏬",
         "image": "/game-template/mlive.jpeg"
       }
   },
@@ -60,7 +60,7 @@
     "clues":
       {
         "text": "",
-        "hint": "At the end of the world",
+        "hint": "⚖️",
         "image": "/game-template/nybygge.jpeg"
       }
   },
@@ -72,8 +72,8 @@
     },
     "clues":
       {
-        "text": "Media!",
-        "hint": "Evolution",
+        "text": "",
+        "hint": "Media Evolution",
         "image": "/game-template/media-ev.jpeg"
       }
   },

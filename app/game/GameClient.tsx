@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { CheckIcon, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { saveProgressAction } from "./actions";
@@ -55,6 +55,8 @@ export default function GameClient({ gameId, items, initialCompleted }: Props) {
   const [locationError, setLocationError] = useState<string | null>(null);
   const [checking, setChecking] = useState<boolean>(false);
   const [userPos, setUserPos] = useState<{ lat: number; lng: number } | null>(null);
+  const [hintPresses, setHintPresses] = useState<number>(0);
+  const hereBtnRef = useRef<HTMLButtonElement | null>(null);
 
   const current = items[currentIdx];
 
@@ -70,6 +72,120 @@ export default function GameClient({ gameId, items, initialCompleted }: Props) {
       await saveProgressAction(gameId, newCompleted);
     } catch {}
   }, [gameId]);
+
+  const launchBurstAt = useCallback((clientX: number, clientY: number) => {
+    if (typeof window === "undefined") return;
+    const canvas = document.createElement("canvas");
+    canvas.style.position = "fixed";
+    canvas.style.left = "0";
+    canvas.style.top = "0";
+    canvas.style.width = "100%";
+    canvas.style.height = "100%";
+    canvas.style.pointerEvents = "none";
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    document.body.appendChild(canvas);
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const colors = ["#ef4444", "#f59e0b", "#10b981", "#3b82f6", "#8b5cf6", "#ec4899"]; // tailwind-ish
+    type Particle = {
+      x: number; y: number; vx: number; vy: number; life: number; rot: number; vr: number; size: number; color: string; kind: "confetti" | "heart";
+    };
+
+    const originX = clientX;
+    const originY = clientY;
+    const particles: Particle[] = [];
+    const totalConfetti = 140;
+    const totalHearts = 40;
+
+    for (let i = 0; i < totalConfetti; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 4 + Math.random() * 6;
+      particles.push({
+        x: originX,
+        y: originY,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - 2,
+        life: 60 + Math.random() * 30,
+        rot: Math.random() * Math.PI,
+        vr: (Math.random() - 0.5) * 0.3,
+        size: 6 + Math.random() * 6,
+        color: colors[(Math.random() * colors.length) | 0],
+        kind: "confetti",
+      });
+    }
+    for (let i = 0; i < totalHearts; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 3 + Math.random() * 4;
+      particles.push({
+        x: originX,
+        y: originY,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - 1,
+        life: 70 + Math.random() * 30,
+        rot: 0,
+        vr: 0,
+        size: 16 + Math.random() * 10,
+        color: "#ef4444",
+        kind: "heart",
+      });
+    }
+
+    let frame = 0;
+    const gravity = 0.15;
+
+    const tick = () => {
+      if (!ctx) return;
+      frame++;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.vy += gravity;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rot += p.vr;
+        p.life -= 1;
+
+        if (p.kind === "confetti") {
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rot);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+          ctx.restore();
+        } else {
+          ctx.save();
+          ctx.font = `${p.size}px system-ui, -apple-system, Segoe UI, Roboto, Emoji`;
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText("💖", p.x, p.y);
+          ctx.restore();
+        }
+
+        if (p.life <= 0) {
+          particles.splice(i, 1);
+        }
+      }
+      if (particles.length > 0 && frame < 240) {
+        requestAnimationFrame(tick);
+      } else {
+        canvas.remove();
+      }
+    };
+
+    requestAnimationFrame(tick);
+  }, []);
+
+  const burstFromButton = useCallback(() => {
+    const btn = hereBtnRef.current;
+    if (!btn) return;
+    const rect = btn.getBoundingClientRect();
+    const x = rect.left + rect.width / 2;
+    const y = rect.top + rect.height / 2;
+    launchBurstAt(x, y);
+  }, [launchBurstAt]);
 
   const checkLocation = useCallback(() => {
     if (!current) return;
@@ -89,6 +205,7 @@ export default function GameClient({ gameId, items, initialCompleted }: Props) {
             const updated = [...completedTaskIds, current.taskId];
             setCompletedTaskIds(updated);
             saveProgress(updated);
+            burstFromButton();
           }
         } else {
           setLocationError(`Not quite there. You are ${(distance | 0)}m away.`);
@@ -119,6 +236,28 @@ export default function GameClient({ gameId, items, initialCompleted }: Props) {
     );
     return () => navigator.geolocation.clearWatch(watchId);
   }, []);
+
+  // Reset hint press counter when switching tasks
+  useEffect(() => {
+    setHintPresses(0);
+  }, [currentIdx]);
+
+  const onHintClick = () => {
+    setShowHint((v) => !v);
+    const next = hintPresses + 1;
+    if (next >= 10) {
+      setHintPresses(0);
+      const confirmed = window.confirm("Do you want to skip this task?");
+      if (confirmed && !completedTaskIds.includes(current.taskId)) {
+        const updated = [...completedTaskIds, current.taskId];
+        setCompletedTaskIds(updated);
+        saveProgress(updated);
+        burstFromButton();
+      }
+    } else {
+      setHintPresses(next);
+    }
+  };
 
 
 
@@ -151,10 +290,10 @@ export default function GameClient({ gameId, items, initialCompleted }: Props) {
           <div className="text-center text-lg font-semibold">{current.clues.text}</div>
 
           <div className="flex items-center justify-center gap-2">
-            <Button variant="secondary" onClick={() => setShowHint((v) => !v)}>
+            <Button variant="secondary" onClick={onHintClick}>
               <HelpCircle className="mr-2 h-4 w-4" /> {showHint ? "Hide hint" : "Show hint"}
             </Button>
-            <Button onClick={checkLocation} disabled={checking}>
+            <Button onClick={checkLocation} disabled={checking} ref={hereBtnRef}>
               {checking ? "Checking..." : "I am here"}
             </Button>
           </div>
