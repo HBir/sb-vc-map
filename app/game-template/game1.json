@@ -2,17 +2,19 @@
   {
     "taskId": "1.1",
     "solution": {
-      "long": 13.001600976658326,
-      "lat": 55.59562030835825
+      "long": 13.000232378626915,
+      "lat": 55.60616736878191
     },
     "clues":
       {
-        "text": "Δ",
-        "hint": "Triangeln",
-        "image": "/game-template/img1.jpeg"
+        "text": "Stortorget!",
+        "hint": "At the end of the world",
+        "image": "/game-template/home.jpeg"
       }
   },
+
   {
+    "comment": "titanic",
     "taskId": "1.2",
     "solution": {
       "long": 12.970906589536446,
@@ -22,7 +24,195 @@
       {
         "text": "Blåsigt!",
         "hint": "Titanic",
-        "image": "/game-template/img2.jpeg"
+        "image": "/game-template/titanic.jpeg"
+      }
+  },
+  {
+    "taskId": "1.3",
+    "solution": {
+      "long": 12.991537490544054,
+      "lat": 55.61239942903158
+    },
+    "clues":
+      {
+        "text": "Media!",
+        "hint": "Evolution",
+        "image": "/game-template/media-ev.jpeg"
+      }
+  },
+  {
+    "taskId": "1.4",
+    "solution": {
+      "long": 13.000232378626915,
+      "lat": 55.60616736878191
+    },
+    "clues":
+      {
+        "text": "Stortorget!",
+        "hint": "At the end of the world",
+        "image": "/game-template/stortorg.jpeg"
+      }
+  },
+
+  {
+    "comment": "triangeln",
+    "taskId": "1.6",
+    "solution": {
+      "long": 13.001600976658326,
+      "lat": 55.59562030835825
+    },
+    "clues":
+      {
+        "text": "Δ",
+        "hint": "Triangeln",
+        "image": "/game-template/triangeln.jpeg"
+      }
+  },
+
+
+  {
+    "taskId": "1.5",
+    "solution": {
+      "long": 13.000232378626915,
+      "lat": 55.60616736878191
+    },
+    "clues":
+      {
+        "text": "Stortorget!",
+        "hint": "At the end of the world",
+        "image": "/game-template/ggatan.jpeg"
+      }
+  },
+
+  {
+    "taskId": "1.7",
+    "solution": {
+      "long": 13.000232378626915,
+      "lat": 55.60616736878191
+    },
+    "clues":
+      {
+        "text": "Stortorget!",
+        "hint": "At the end of the world",
+        "image": "/game-template/kanalen.jpeg"
+      }
+  },
+  {
+    "taskId": "1.8",
+    "solution": {
+      "long": 13.000232378626915,
+      "lat": 55.60616736878191
+    },
+    "clues":
+      {
+        "text": "Stortorget!",
+        "hint": "At the end of the world",
+        "image": "/game-template/mlive.jpeg"
+      }
+  },
+  {
+    "taskId": "1.9",
+    "solution": {
+      "long": 13.000232378626915,
+      "lat": 55.60616736878191
+    },
+    "clues":
+      {
+        "text": "Stortorget!",
+        "hint": "At the end of the world",
+        "image": "/game-template/nybygge.jpeg"
+      }
+  },
+  {
+    "taskId": "1.10",
+    "solution": {
+      "long": 13.000232378626915,
+      "lat": 55.60616736878191
+    },
+    "clues":
+      {
+        "text": "Stortorget!",
+        "hint": "At the end of the world",
+        "image": "/game-template/pildammsparken.jpeg"
+      }
+  },
+  {
+    "taskId": "1.11",
+    "solution": {
+      "long": 13.000232378626915,
+      "lat": 55.60616736878191
+    },
+    "clues":
+      {
+        "text": "Stortorget!",
+        "hint": "At the end of the world",
+        "image": "/game-template/ribban.jpeg"
+      }
+  },
+  {
+    "taskId": "1.12",
+    "solution": {
+      "long": 13.000232378626915,
+      "lat": 55.60616736878191
+    },
+    "clues":
+      {
+        "text": "Stortorget!",
+        "hint": "At the end of the world",
+        "image": "/game-template/rsjopark.jpeg"
+      }
+  },
+  {
+    "taskId": "1.13",
+    "solution": {
+      "long": 13.000232378626915,
+      "lat": 55.60616736878191
+    },
+    "clues":
+      {
+        "text": "Stortorget!",
+        "hint": "At the end of the world",
+        "image": "/game-template/tattoo.jpeg"
+      }
+  },
+  {
+    "taskId": "1.14",
+    "solution": {
+      "long": 13.000232378626915,
+      "lat": 55.60616736878191
+    },
+    "clues":
+      {
+        "text": "Stortorget!",
+        "hint": "At the end of the world",
+        "image": "/game-template/ttorso.jpeg"
+      }
+  },
+  {
+    "taskId": "1.15",
+    "solution": {
+      "long": 13.000232378626915,
+      "lat": 55.60616736878191
+    },
+    "clues":
+      {
+        "text": "Stortorget!",
+        "hint": "At the end of the world",
+        "image": "/game-template/vhamnen.jpeg"
+      }
+  },
+  {
+    "taskId": "1.16",
+    "solution": {
+      "long": 13.000232378626915,
+      "lat": 55.60616736878191
+    },
+    "clues":
+      {
+        "text": "Stortorget!",
+        "hint": "At the end of the world",
+        "image": "/game-template/home2.jpeg"
       }
   }
+
 ]

@@ -60,6 +60,11 @@ export default function GameClient({ gameId, items, initialCompleted }: Props) {
 
   const allDone = useMemo(() => completedTaskIds.length >= items.length, [completedTaskIds.length, items.length]);
 
+  const showDebugIndices = process.env.NEXT_PUBLIC_SHOW_TASK_INDICES === "true";
+  if (showDebugIndices) {
+    console.log("DEBUG FLAG ON");
+  }
+
   const saveProgress = useCallback(async (newCompleted: string[]) => {
     try {
       await saveProgressAction(gameId, newCompleted);
@@ -115,6 +120,8 @@ export default function GameClient({ gameId, items, initialCompleted }: Props) {
     return () => navigator.geolocation.clearWatch(watchId);
   }, []);
 
+
+
   return (
     <div className="flex flex-col gap-4 p-4 max-w-xl mx-auto w-full">
       {/* Progress */}
@@ -162,7 +169,11 @@ export default function GameClient({ gameId, items, initialCompleted }: Props) {
 
           <LeafletMap
             center={userPos}
-            target={{ lat: current.solution.lat, lng: current.solution.long }}
+            completed={items
+              .filter((it) => completedTaskIds.includes(it.taskId))
+              .map((it) => ({ lat: it.solution.lat, lng: it.solution.long }))}
+            tasks={showDebugIndices ? items.map((it, i) => ({ lat: it.solution.lat, lng: it.solution.long, index: i })) : undefined}
+            showDebugIndices={showDebugIndices}
           />
         </div>
       ) : (
