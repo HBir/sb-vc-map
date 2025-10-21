@@ -58,6 +58,7 @@ export default function GameClient({ gameId, items, initialCompleted, initialSho
   const [userPos, setUserPos] = useState<{ lat: number; lng: number } | null>(null);
   const [hintPresses, setHintPresses] = useState<number>(0);
   const hereBtnRef = useRef<HTMLButtonElement | null>(null);
+  const completionRef = useRef<HTMLDivElement | null>(null);
   const [introActive, setIntroActive] = useState<boolean>(initialShowIntro ?? (initialCompleted.length === 0));
 
   const current = items[currentIdx];
@@ -188,6 +189,23 @@ export default function GameClient({ gameId, items, initialCompleted, initialSho
     const y = rect.top + rect.height / 2;
     launchBurstAt(x, y);
   }, [launchBurstAt]);
+
+  // When the game is fully completed, periodically celebrate over the completion message
+  useEffect(() => {
+    if (!allDone) return;
+    const elem = completionRef.current;
+    if (!elem) return;
+    const fire = () => {
+      const rect = elem.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+      launchBurstAt(x, y);
+    };
+    // Fire immediately and then every 3 seconds
+    fire();
+    const id = setInterval(fire, 3000);
+    return () => clearInterval(id);
+  }, [allDone, launchBurstAt]);
 
   const checkLocation = useCallback(() => {
     if (!current) return;
@@ -332,7 +350,7 @@ export default function GameClient({ gameId, items, initialCompleted, initialSho
           />
         </div>
       ) : (
-        <div className="text-center py-10">
+        <div className="text-center py-10" ref={completionRef}>
           {/* TODO: Add something better here */}
           <div className="text-2xl font-bold mb-2">All challenges completed!</div>
           <div className="text-muted-foreground">Great job ✨</div>
