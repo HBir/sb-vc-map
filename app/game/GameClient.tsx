@@ -143,7 +143,7 @@ export default function GameClient({ gameId, items, initialCompleted }: Props) {
       {/* Current challenge */}
       {!allDone ? (
         <div className="flex flex-col gap-4">
-          <div className="h-80 w-full overflow-hidden rounded-md border bg-muted flex items-center justify-center">
+          <div className="w-full overflow-hidden rounded-md border bg-muted flex items-center justify-center">
             {/* In prod we might map JSON paths to /public assets directly */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={resolveImagePath(current.clues.image)} alt={current.clues.text} className="h-full w-auto max-h-full object-contain" />
