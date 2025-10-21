@@ -136,10 +136,10 @@ export default function GameClient({ gameId, items, initialCompleted }: Props) {
       {/* Current challenge */}
       {!allDone ? (
         <div className="flex flex-col gap-4">
-          <div className="aspect-video w-full overflow-hidden rounded-md border bg-muted">
+          <div className="h-80 w-full overflow-hidden rounded-md border bg-muted flex items-center justify-center">
             {/* In prod we might map JSON paths to /public assets directly */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={resolveImagePath(current.clues.image)} alt={current.clues.text} className="h-full w-full object-cover" />
+            <img src={resolveImagePath(current.clues.image)} alt={current.clues.text} className="h-full w-auto max-h-full object-contain" />
           </div>
           <div className="text-center text-lg font-semibold">{current.clues.text}</div>
 
@@ -167,6 +167,7 @@ export default function GameClient({ gameId, items, initialCompleted }: Props) {
         </div>
       ) : (
         <div className="text-center py-10">
+          {/* TODO: Add something better here */}
           <div className="text-2xl font-bold mb-2">All challenges completed!</div>
           <div className="text-muted-foreground">Great job ✨</div>
         </div>
