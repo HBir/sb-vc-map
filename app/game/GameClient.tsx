@@ -13,6 +13,7 @@ type GameClue = {
 };
 
 type GameItem = {
+  taskId: string;
   solution: { long: number; lat: number };
   clues: GameClue;
 };
@@ -20,7 +21,7 @@ type GameItem = {
 type Props = {
   gameId: string;
   items: GameItem[];
-  initialCompleted: number[];
+  initialCompleted: string[];
 };
 
 function resolveImagePath(p: string): string {
@@ -45,9 +46,9 @@ function haversineMeters(aLat: number, aLng: number, bLat: number, bLng: number)
 }
 
 export default function GameClient({ gameId, items, initialCompleted }: Props) {
-  const [completed, setCompleted] = useState<number[]>(initialCompleted);
+  const [completedTaskIds, setCompletedTaskIds] = useState<string[]>(initialCompleted);
   const [currentIdx, setCurrentIdx] = useState<number>(() => {
-    const firstIncomplete = items.findIndex((_, i) => !initialCompleted.includes(i));
+    const firstIncomplete = items.findIndex((it) => !initialCompleted.includes(it.taskId));
     return firstIncomplete === -1 ? 0 : firstIncomplete;
   });
   const [showHint, setShowHint] = useState<boolean>(false);
@@ -57,9 +58,9 @@ export default function GameClient({ gameId, items, initialCompleted }: Props) {
 
   const current = items[currentIdx];
 
-  const allDone = useMemo(() => completed.length >= items.length, [completed.length, items.length]);
+  const allDone = useMemo(() => completedTaskIds.length >= items.length, [completedTaskIds.length, items.length]);
 
-  const saveProgress = useCallback(async (newCompleted: number[]) => {
+  const saveProgress = useCallback(async (newCompleted: string[]) => {
     try {
       await saveProgressAction(gameId, newCompleted);
     } catch {}
@@ -79,9 +80,9 @@ export default function GameClient({ gameId, items, initialCompleted }: Props) {
         const { latitude, longitude } = pos.coords;
         const distance = haversineMeters(latitude, longitude, current.solution.lat, current.solution.long);
         if (distance <= 100) {
-          if (!completed.includes(currentIdx)) {
-            const updated = [...completed, currentIdx].sort((a, b) => a - b);
-            setCompleted(updated);
+          if (!completedTaskIds.includes(current.taskId)) {
+            const updated = [...completedTaskIds, current.taskId];
+            setCompletedTaskIds(updated);
             saveProgress(updated);
           }
         } else {
@@ -95,14 +96,14 @@ export default function GameClient({ gameId, items, initialCompleted }: Props) {
       },
       { enableHighAccuracy: true, maximumAge: 10000, timeout: 10000 },
     );
-  }, [completed, current, currentIdx, saveProgress]);
+  }, [completedTaskIds, current, currentIdx, saveProgress]);
 
   useEffect(() => {
-    if (completed.includes(currentIdx)) {
-      const next = items.findIndex((_, i) => !completed.includes(i));
+    if (completedTaskIds.includes(current.taskId)) {
+      const next = items.findIndex((it) => !completedTaskIds.includes(it.taskId));
       if (next !== -1) setCurrentIdx(next);
     }
-  }, [completed, currentIdx, items]);
+  }, [completedTaskIds, current.taskId, items]);
 
   useEffect(() => {
     if (typeof window === "undefined" || !("geolocation" in navigator)) return;
@@ -118,8 +119,8 @@ export default function GameClient({ gameId, items, initialCompleted }: Props) {
     <div className="flex flex-col gap-4 p-4 max-w-xl mx-auto w-full">
       {/* Progress */}
       <div className="flex items-center gap-2 justify-center sticky top-0 bg-background/80 backdrop-blur py-2 z-10">
-        {items.map((_, i) => {
-          const done = completed.includes(i);
+        {items.map((it, i) => {
+          const done = completedTaskIds.includes(it.taskId);
           return (
             <button
               key={i}

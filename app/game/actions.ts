@@ -2,7 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server";
 
-export async function saveProgressAction(gameId: string, completedIndices: number[]) {
+export async function saveProgressAction(gameId: string, completedTaskIds: string[]) {
   const supabase = await createClient();
   const { data, error } = await supabase.auth.getUser();
   if (error || !data.user) {
@@ -15,7 +15,7 @@ export async function saveProgressAction(gameId: string, completedIndices: numbe
       {
         user_id: data.user.id,
         game_id: gameId,
-        completed_indices: completedIndices,
+        completed_task_ids: completedTaskIds,
       },
       { onConflict: "user_id,game_id" },
     )

@@ -10,6 +10,7 @@ type GameClue = {
 };
 
 type GameItem = {
+  taskId: string;
   solution: { long: number; lat: number };
   clues: GameClue;
 };
@@ -28,12 +29,12 @@ export default async function Home() {
 
   const { data: progressRow } = await supabase
     .from("game_progress")
-    .select("completed_indices")
+    .select("completed_task_ids")
     .eq("user_id", data.user.id)
     .eq("game_id", "game1")
     .maybeSingle();
 
-  const completedIndices: number[] = progressRow?.completed_indices ?? [];
+  const completedTaskIds: string[] = progressRow?.completed_task_ids ?? [];
 
   return (
     <div className="min-h-screen w-full flex flex-col">
@@ -44,7 +45,7 @@ export default async function Home() {
       <GameClient
         gameId="game1"
         items={gameData}
-        initialCompleted={completedIndices}
+        initialCompleted={completedTaskIds}
       />
     </div>
   );
